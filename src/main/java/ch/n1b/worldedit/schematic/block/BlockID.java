@@ -227,6 +227,8 @@ public final class BlockID {
     public static final int JUNGLE_DOOR = 195;
     public static final int ACACIA_DOOR = 196;
     public static final int DARK_OAK_DOOR = 197;
+    public static final int CONCRETE = 251;
+    public static final int CONCRETE_POWDER = 252;
 
     private BlockID() {
     }
