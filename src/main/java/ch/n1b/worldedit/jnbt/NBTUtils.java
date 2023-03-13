@@ -16,7 +16,6 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-
 package ch.n1b.worldedit.jnbt;
 
 import ch.n1b.vector.Vec3D;
@@ -105,6 +104,8 @@ public final class NBTUtils {
             return NBTConstants.TYPE_STRING;
         } else if (clazz.equals(IntArrayTag.class)) {
             return NBTConstants.TYPE_INT_ARRAY;
+        } else if (clazz.equals(LongArrayTag.class)) {
+            return NBTConstants.TYPE_LONG_ARRAY;
         } else {
             throw new IllegalArgumentException("Invalid tag classs ("
                     + clazz.getName() + ").");
@@ -120,41 +121,42 @@ public final class NBTUtils {
      */
     public static Class<? extends Tag> getTypeClass(int type) {
         switch (type) {
-        case NBTConstants.TYPE_END:
-            return EndTag.class;
-        case NBTConstants.TYPE_BYTE:
-            return ByteTag.class;
-        case NBTConstants.TYPE_SHORT:
-            return ShortTag.class;
-        case NBTConstants.TYPE_INT:
-            return IntTag.class;
-        case NBTConstants.TYPE_LONG:
-            return LongTag.class;
-        case NBTConstants.TYPE_FLOAT:
-            return FloatTag.class;
-        case NBTConstants.TYPE_DOUBLE:
-            return DoubleTag.class;
-        case NBTConstants.TYPE_BYTE_ARRAY:
-            return ByteArrayTag.class;
-        case NBTConstants.TYPE_STRING:
-            return StringTag.class;
-        case NBTConstants.TYPE_LIST:
-            return ListTag.class;
-        case NBTConstants.TYPE_COMPOUND:
-            return CompoundTag.class;
-        case NBTConstants.TYPE_INT_ARRAY:
-            return IntArrayTag.class;
-        default:
-            throw new IllegalArgumentException("Invalid tag type : " + type
-                    + ".");
+            case NBTConstants.TYPE_END:
+                return EndTag.class;
+            case NBTConstants.TYPE_BYTE:
+                return ByteTag.class;
+            case NBTConstants.TYPE_SHORT:
+                return ShortTag.class;
+            case NBTConstants.TYPE_INT:
+                return IntTag.class;
+            case NBTConstants.TYPE_LONG:
+                return LongTag.class;
+            case NBTConstants.TYPE_FLOAT:
+                return FloatTag.class;
+            case NBTConstants.TYPE_DOUBLE:
+                return DoubleTag.class;
+            case NBTConstants.TYPE_BYTE_ARRAY:
+                return ByteArrayTag.class;
+            case NBTConstants.TYPE_STRING:
+                return StringTag.class;
+            case NBTConstants.TYPE_LIST:
+                return ListTag.class;
+            case NBTConstants.TYPE_COMPOUND:
+                return CompoundTag.class;
+            case NBTConstants.TYPE_INT_ARRAY:
+                return IntArrayTag.class;
+            default:
+                throw new IllegalArgumentException("Invalid tag type : " + type
+                        + ".");
         }
     }
 
     /**
-     * Read a vector from a list tag containing ideally three values: the
-     * X, Y, and Z components.
+     * Read a vector from a list tag containing ideally three values: the X, Y,
+     * and Z components.
      *
-     * <p>For values that are unavailable, their values will be 0.</p>
+     * <p>
+     * For values that are unavailable, their values will be 0.</p>
      *
      * @param listTag the list tag
      * @return a vector
