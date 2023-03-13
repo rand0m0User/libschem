@@ -16,9 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-
 package ch.n1b.worldedit.schematic.schematic;
-
 
 import ch.n1b.vector.Vec3D;
 import ch.n1b.worldedit.jnbt.ByteArrayTag;
@@ -116,11 +114,13 @@ public class MCEditSchematicFormat extends SchematicFormat {
         // Need to pull out tile entities
         List<Tag> tileEntities = getChildTag(schematic, "TileEntities", ListTag.class)
                 .getValue();
-        Map<BlockVector, Map<String, Tag>> tileEntitiesMap =
-                new HashMap<>();
+        Map<BlockVector, Map<String, Tag>> tileEntitiesMap
+                = new HashMap<>();
 
         for (Tag tag : tileEntities) {
-            if (!(tag instanceof CompoundTag)) continue;
+            if (!(tag instanceof CompoundTag)) {
+                continue;
+            }
             CompoundTag t = (CompoundTag) tag;
 
             int x = 0;
@@ -193,7 +193,7 @@ public class MCEditSchematicFormat extends SchematicFormat {
             throw new DataException("Length of region too large for a .schematic");
         }
 
-        HashMap<String, Tag> schematic = new HashMap<String, Tag>();
+        HashMap<String, Tag> schematic = new HashMap<>();
         schematic.put("Width", new ShortTag((short) width));
         schematic.put("Length", new ShortTag((short) length));
         schematic.put("Height", new ShortTag((short) height));
@@ -210,7 +210,7 @@ public class MCEditSchematicFormat extends SchematicFormat {
             for (int y = 0; y < height; ++y) {
                 for (int z = 0; z < length; ++z) {
                     int index = y * width * length + z * width + x;
-                    BaseBlock block = clipboard.getPoint(new BlockVector(x, y, z));
+                    BaseBlock block = clipboard.data[x][y][z];
 
                     // Save 4096 IDs in an AddBlocks section
                     if (block.getType() > 255) {
@@ -218,8 +218,8 @@ public class MCEditSchematicFormat extends SchematicFormat {
                             addBlocks = new byte[(blocks.length >> 1) + 1];
                         }
 
-                        addBlocks[index >> 1] = (byte) (((index & 1) == 0) ?
-                                addBlocks[index >> 1] & 0xF0 | (block.getType() >> 8) & 0xF
+                        addBlocks[index >> 1] = (byte) (((index & 1) == 0)
+                                ? addBlocks[index >> 1] & 0xF0 | (block.getType() >> 8) & 0xF
                                 : addBlocks[index >> 1] & 0xF | ((block.getType() >> 8) & 0xF) << 4);
                     }
 
@@ -293,10 +293,11 @@ public class MCEditSchematicFormat extends SchematicFormat {
      * @param key The name of the tag to get
      * @param expected The expected type of the tag
      * @return child tag casted to the expected type
-     * @throws DataException if the tag does not exist or the tag is not of the expected type
+     * @throws DataException if the tag does not exist or the tag is not of the
+     * expected type
      */
     private static <T extends Tag> T getChildTag(Map<String, Tag> items, String key,
-                                                 Class<T> expected) throws DataException {
+            Class<T> expected) throws DataException {
 
         if (!items.containsKey(key)) {
             throw new DataException("Schematic file is missing a \"" + key + "\" tag");

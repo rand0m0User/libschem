@@ -16,9 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-
 package ch.n1b.worldedit.schematic.schematic;
-
 
 import ch.n1b.worldedit.schematic.block.BaseBlock;
 import ch.n1b.worldedit.schematic.data.DataException;
@@ -35,13 +33,14 @@ import java.util.Set;
 
 public abstract class SchematicFormat {
 
-    private static final Map<String, SchematicFormat> SCHEMATIC_FORMATS = new HashMap<String, SchematicFormat>();
+    private static final Map<String, SchematicFormat> SCHEMATIC_FORMATS = new HashMap<>();
 
     // Built-in schematic formats
     public static final SchematicFormat MCEDIT = new MCEditSchematicFormat();
+    public static final SchematicFormat LITEMATIC = new litematicaSchematicFormat();
 
     public static Set<SchematicFormat> getFormats() {
-        return Collections.unmodifiableSet(new HashSet<SchematicFormat>(SCHEMATIC_FORMATS.values()));
+        return Collections.unmodifiableSet(new HashSet<>(SCHEMATIC_FORMATS.values()));
     }
 
     public static SchematicFormat getFormat(String lookupName) {
@@ -66,7 +65,7 @@ public abstract class SchematicFormat {
 
     protected SchematicFormat(String name, String... lookupNames) {
         this.name = name;
-        List<String> registeredLookupNames = new ArrayList<String>(lookupNames.length);
+        List<String> registeredLookupNames = new ArrayList<>(lookupNames.length);
         for (int i = 0; i < lookupNames.length; ++i) {
             if (i == 0 || !SCHEMATIC_FORMATS.containsKey(lookupNames[i].toLowerCase())) {
                 SCHEMATIC_FORMATS.put(lookupNames[i].toLowerCase(), this);
@@ -93,30 +92,30 @@ public abstract class SchematicFormat {
         BaseBlock block;
         switch (id) {
             /*case BlockID.WALL_SIGN:
-            case BlockID.SIGN_POST:
-                block = new SignBlock(id, data);
-                break;
+             case BlockID.SIGN_POST:
+             block = new SignBlock(id, data);
+             break;
 
-            case BlockID.CHEST:
-                block = new ChestBlock(data);
-                break;
+             case BlockID.CHEST:
+             block = new ChestBlock(data);
+             break;
 
-            case BlockID.FURNACE:
-            case BlockID.BURNING_FURNACE:
-                block = new FurnaceBlock(id, data);
-                break;
+             case BlockID.FURNACE:
+             case BlockID.BURNING_FURNACE:
+             block = new FurnaceBlock(id, data);
+             break;
 
-            case BlockID.DISPENSER:
-                block = new DispenserBlock(data);
-                break;
+             case BlockID.DISPENSER:
+             block = new DispenserBlock(data);
+             break;
 
-            case BlockID.MOB_SPAWNER:
-                block = new MobSpawnerBlock(id);
-                break;
+             case BlockID.MOB_SPAWNER:
+             block = new MobSpawnerBlock(id);
+             break;
 
-            case BlockID.NOTE_BLOCK:
-                block = new NoteBlock(data);
-                break;*/
+             case BlockID.NOTE_BLOCK:
+             block = new NoteBlock(data);
+             break;*/
 
             default:
                 block = new BaseBlock(id, data);
@@ -127,6 +126,7 @@ public abstract class SchematicFormat {
 
     /**
      * Loads a schematic from the given file into a CuboidClipboard
+     *
      * @param file The file to load from
      * @return The CuboidClipboard containing the contents of this schematic
      * @throws IOException If an error occurs while reading data
@@ -135,8 +135,9 @@ public abstract class SchematicFormat {
     public abstract Cuboid load(File file) throws IOException, DataException;
 
     /**
-     * Saves the data from the specified CuboidClipboard to the given file, overwriting any
-     * existing data in the file
+     * Saves the data from the specified CuboidClipboard to the given file,
+     * overwriting any existing data in the file
+     *
      * @param clipboard The clipboard to get data from
      * @param file The file to save to
      * @throws IOException If an error occurs while writing data
