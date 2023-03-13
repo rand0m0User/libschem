@@ -24,7 +24,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
-import static com.google.common.base.Preconditions.checkNotNull;
+import static ch.n1b.worldedit.jnbt.Preconditions.checkNotNull;
 
 /**
  * Helps create list tags.

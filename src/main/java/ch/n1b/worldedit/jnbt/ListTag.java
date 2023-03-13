@@ -23,7 +23,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-import static com.google.common.base.Preconditions.checkNotNull;
+import static ch.n1b.worldedit.jnbt.Preconditions.checkNotNull;
 
 /**
  * The {@code TAG_List} tag.

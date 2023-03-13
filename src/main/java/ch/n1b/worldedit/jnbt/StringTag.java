@@ -19,7 +19,7 @@
 
 package ch.n1b.worldedit.jnbt;
 
-import static com.google.common.base.Preconditions.checkNotNull;
+import static ch.n1b.worldedit.jnbt.Preconditions.checkNotNull;
 
 /**
  * The {@code TAG_String} tag.

@@ -26,7 +26,7 @@ import java.io.OutputStream;
 import java.util.List;
 import java.util.Map;
 
-import static com.google.common.base.Preconditions.checkNotNull;
+import static ch.n1b.worldedit.jnbt.Preconditions.checkNotNull;
 
 /**
  * This class writes <strong>NBT</strong>, or <strong>Named Binary Tag</strong>

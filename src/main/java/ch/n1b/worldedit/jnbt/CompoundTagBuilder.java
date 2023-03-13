@@ -22,7 +22,7 @@ package ch.n1b.worldedit.jnbt;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.google.common.base.Preconditions.checkNotNull;
+import static ch.n1b.worldedit.jnbt.Preconditions.checkNotNull;
 
 /**
  * Helps create compound tags.
