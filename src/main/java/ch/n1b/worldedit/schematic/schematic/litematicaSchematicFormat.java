@@ -260,6 +260,7 @@ public class litematicaSchematicFormat extends SchematicFormat {
 //    }
     static { //trolololol parsing JSON without a lib
         try {
+            String mc = "minecraft:";
             InputStream str = litematicaSchematicFormat.class.getResourceAsStream("block_ids.json.z");
             byte[] compressed = new byte[str.available()];
             str.read(compressed);
@@ -277,7 +278,7 @@ public class litematicaSchematicFormat extends SchematicFormat {
                     BaseBlock[] newPalette = new BaseBlock[Palette.length + 1];
                     System.arraycopy(Palettenames, 0, newnames, 0, Palettenames.length);
                     System.arraycopy(Palette, 0, newPalette, 0, Palette.length);
-                    newnames[Palettenames.length] = fString[i].split("\"")[1];
+                    newnames[Palettenames.length] = mc + fString[i].split("\"")[1];
                     newPalette[Palette.length] = new BaseBlock(
                             Short.parseShort(fString[i + 1].split(": ")[1].replace(",", "")),
                             Short.parseShort(fString[i + 2].split(": ")[1].replace(",", ""))
